@@ -18,7 +18,37 @@ Aegis is a programming language that adopts the readable syntax of Pascal while 
 - Operator overloading for intuitive code
 - Templates/Generics for type-safe containers and algorithms
 
+## Type System
+
+Aegis uses C++ compatible type names:
+
+- `int` - Integer type
+- `float` - Single-precision floating-point
+- `double` - Double-precision floating-point
+- `char` - Character type
+- `bool` - Boolean type
+- `string` - String type
+- `void` - Absence of type
+
 ## Syntax Overview
+
+### Arrays
+
+Arrays in Aegis are declared using square brackets:
+
+```pascal
+// Fixed-size array
+var numbers: int[5];
+
+// Array initialization
+var scores: int[3] = {95, 87, 91};
+
+// Multi-dimensional arrays
+var matrix: int[3][3];
+
+// Dynamic arrays
+var dynamicArray: vector<int>;
+```
 
 ### File Structure
 
@@ -31,7 +61,7 @@ Every Aegis program requires a main method as the entry point:
 ```pascal
 class HelloWorld {
 public:
-    static void main(args: array of string) {
+    static void main(string[] args) {
         // Code execution starts here
         print("Hello, World!");
     }
@@ -41,21 +71,21 @@ public:
 ### Class Definition
 
 ```pascal
-class TPerson {
+class Person {
 public:
     var Name: string;
-    var Age: integer;
+    var Age: int;
 
-    constructor Create(AName: string; AAge: integer);
+    constructor Create(string AName, int AAge);
     void SayHello();
 };
 
-constructor TPerson.Create(AName: string; AAge: integer) {
+constructor Person.Create(string AName, int AAge) {
     Name := AName;
     Age := AAge;
 }
 
-void TPerson.SayHello() {
+void Person.SayHello() {
     print("Hello, my name is ", Name, " and I am ", Age, " years old.");
 }
 ```
@@ -63,19 +93,19 @@ void TPerson.SayHello() {
 ### If-Else Statement
 
 ```pascal
-void CheckAge(Person: TPerson) {
-    if Person.Age >= 18 then
-        print(Person.Name, " is an adult.")
+void CheckAge(Person person) {
+    if person.Age >= 18 then
+        print(person.Name, " is an adult.")
     else
-        print(Person.Name, " is a minor.");
+        print(person.Name, " is a minor.");
 }
 ```
 
 ### Switch-Case Statement
 
 ```pascal
-void DescribeNumber(Value: integer) {
-    case Value of
+void DescribeNumber(int value) {
+    case value of
         0: print("Zero");
         1: print("One");
         2: print("Two");
@@ -89,7 +119,7 @@ void DescribeNumber(Value: integer) {
 
 ```pascal
 void LoopExamples() {
-    var i: integer;
+    var i: int;
     
     // For loop
     for i := 1 to 10 do
@@ -124,7 +154,7 @@ void IOExample() {
 ### Operator Overloading
 
 ```pascal
-operator +(A, B: integer): integer {
+operator +(int A, int B): int {
     return A + B;
 }
 ```
@@ -132,18 +162,18 @@ operator +(A, B: integer): integer {
 ### Templates/Generics
 
 ```pascal
-generic TBox<T> {
+generic Box<T> {
 public:
     var Value: T;
-    constructor Create(AValue: T);
+    constructor Create(T AValue);
     function GetValue(): T;
 };
 
-constructor TBox<T>.Create(AValue: T) {
+constructor Box<T>.Create(T AValue) {
     Value := AValue;
 }
 
-function TBox<T>.GetValue(): T {
+function Box<T>.GetValue(): T {
     return Value;
 }
 ```
@@ -163,12 +193,19 @@ Create a file named `HelloWorld.aeg` with the following content:
 ```pascal
 class HelloWorld {
 public:
-    static void main(args: array of string) {
+    static void main(string[] args) {
         print("Hello, Aegis!");
         
         print("What's your name? ");
         var name: string := input();
         print("Welcome to Aegis, ", name, "!");
+        
+        // Array example
+        var grades: int[3] = {95, 87, 91};
+        print("Your grades are: ");
+        
+        for var i: int := 0 to 2 do
+            print(grades[i], " ");
     }
 };
 ```
@@ -202,4 +239,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Contact
 
-Project Link: [https://github.com/yourusername/aegis](https://github.com/yourusername/aegis)
+Project Link: [Aegis](https://github.com/PLM-18/Aegis)
